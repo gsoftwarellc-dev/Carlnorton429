@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream text-navy font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Progressive enhancement: content is visible by default.
+     Only when JS marks the page ready do we hide-then-animate. */
+  .js-ready .reveal {
+    opacity: 0;
+  }
+  .js-ready .reveal.in-view {
+    opacity: 1;
+    animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animated gradient text (hero highlight) */
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient-pan 5s ease-in-out infinite;
+  }
+
+  /* Underline that grows from the left on hover (nav links) */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, #80B165, #2C8CA2);
+    border-radius: 9999px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Slow-drifting decorative blobs */
+  .animate-drift {
+    animation: drift 16s ease-in-out infinite;
+  }
+  .animate-drift-slow {
+    animation: drift 22s ease-in-out infinite reverse;
+  }
+
+  /* Gentle pulse-ring for the launch badge dot */
+  .animate-soft-pulse {
+    animation: soft-pulse 2.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-ready .reveal {
+      opacity: 1;
+    }
+    .js-ready .reveal.in-view,
+    .animate-gradient,
+    .animate-drift,
+    .animate-drift-slow,
+    .animate-soft-pulse,
+    .animate-float {
+      animation: none !important;
+    }
+  }
+}
+
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(24px, -18px) scale(1.06);
+  }
+  66% {
+    transform: translate(-18px, 16px) scale(0.96);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.55;
+  }
+}
+
+/* Custom selection color */
+::selection {
+  background-color: #80B165;
+  color: #062A43;
+}
