@@ -556,7 +556,7 @@ function Contact() {
               Email Carl
             </a>
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/company/thrivewell-partners-uk/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-navy/15 px-8 py-4 text-base font-semibold text-navy transition-all hover:border-teal hover:text-teal"
